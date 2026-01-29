@@ -15,10 +15,10 @@
 <header class="navbar">
     <div class="logo">🎓 Student Portal</div>
     <nav>
-        <a href="#">Home</a>
+        <a href="{% url 'home' %}">Home</a>
         <a href="#">Courses</a>
         <a href="#">Login</a>
-        <a href="#" class="btn">Sign Up</a>
+        <a href="{% url 'signup' %}" class="btn">Sign Up</a>
     </nav>
 </header>
 
@@ -32,8 +32,12 @@
         <p>Manage courses, assignments, and submissions with ease.</p>
 
         <div class="hero-buttons">
-            <button class="primary-btn">Get Started</button>
-            <button class="secondary-btn">Learn More</button>
+            <a href="{% url 'signup' %}">
+                <button class="primary-btn">Get Started</button>
+            </a>
+            <a href="{% url 'learn_more' %}">
+                <button class="secondary-btn">Learn More</button>
+            </a>
         </div>
     </div>
 </section>
@@ -69,7 +73,9 @@
 <section class="cta slide-up">
     <h2>Start Your Academic Journey</h2>
     <p>Everything you need for digital learning in one place.</p>
-    <button class="primary-btn">Create Account</button>
+    <a href="{% url 'signup' %}">
+        <button class="primary-btn">Create Account</button>
+    </a>
 </section>
 
 <footer>

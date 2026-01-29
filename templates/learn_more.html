@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn More | Student Portal System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/learn_more.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">🎓 Student Portal</div>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="#">Courses</a>
+        <a href="#">Login</a>
+        <a href="{% url 'signup' %}" class="btn">Sign Up</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Learn More About Student Portal System</h1>
+    <p>
+        A centralized platform designed to simplify academic management
+        for students and teachers.
+    </p>
+</section>
+
+<section class="content">
+
+    <div class="card">
+        <h2>👨‍🎓 For Students</h2>
+        <p>
+            Students can easily manage their academic activities through a
+            single dashboard.
+        </p>
+        <ul>
+            <li>Create and manage accounts</li>
+            <li>Browse and enroll in courses</li>
+            <li>View assignments for enrolled courses</li>
+            <li>Submit assignments online</li>
+            <li>Track submitted work</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>👩‍🏫 For Teachers</h2>
+        <p>
+            Teachers get complete control over course and assignment management.
+        </p>
+        <ul>
+            <li>Create and manage courses</li>
+            <li>Create assignments for courses</li>
+            <li>Edit or delete course content</li>
+            <li>View student submissions</li>
+            <li>Verify teacher accounts via institute email</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>🔐 Secure & Organized</h2>
+        <p>
+            The system ensures role-based access and secure data handling.
+        </p>
+        <ul>
+            <li>Student & Teacher role separation</li>
+            <li>OTP verification for teachers</li>
+            <li>Organized submissions per course</li>
+            <li>Clean and intuitive UI</li>
+        </ul>
+    </div>
+
+</section>
+
+<section class="cta">
+    <h2>Ready to Get Started?</h2>
+    <p>Create an account and experience seamless academic management.</p>
+    <a href="{% url 'signup' %}" class="cta-btn">Create Account</a>
+</section>
+
+<footer>
+    <p>© 2026 Student Portal System. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

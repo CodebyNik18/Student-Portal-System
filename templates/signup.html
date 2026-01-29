@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account | Student Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="signup-wrapper">
+
+        <div class="signup-left">
+            <h1>🎓 Student Portal</h1>
+            <p>
+                One platform to manage courses, assignments,
+                and academic growth — for students and teachers.
+            </p>
+
+            <div class="highlights">
+                <span>✔ Secure</span>
+                <span>✔ Organized</span>
+                <span>✔ Smart Learning</span>
+            </div>
+        </div>
+
+        <div class="signup-right">
+            <h2>Create Account</h2>
+            <p class="subtitle">Join the learning ecosystem</p>
+
+            <form method="POST">
+                <!-- Django: {% csrf_token %} -->
+
+                <!-- Full Name -->
+                <div class="input-group">
+                    <input type="text" name="full_name" required>
+                    <label>Full Name</label>
+                </div>
+
+                <!-- Email -->
+                <div class="input-group">
+                    <input type="email" name="email" required>
+                    <label>Email</label>
+                </div>
+
+                <!-- Password -->
+                <div class="input-group">
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                </div>
+
+                <!-- ROLE (this is the IMPORTANT FIX) -->
+                <input type="hidden" name="role" id="roleInput" value="student">
+
+                <div class="role-box">
+                    <div class="role-option active" data-role="student">
+                        👨‍🎓 Student
+                    </div>
+                    <div class="role-option" data-role="teacher">
+                        👩‍🏫 Teacher
+                    </div>
+                </div>
+
+                <!-- Teacher Section -->
+                <div class="teacher-section" id="teacherSection" style="display:none;">
+
+                    <div class="input-group">
+                        <input type="email" name="institute_email">
+                        <label>Institute Email</label>
+                    </div>
+
+                    <!-- OTP is handled via backend / AJAX later -->
+                    <button type="button" class="otp-btn">
+                        Send OTP
+                    </button>
+
+                    <div class="input-group">
+                        <input type="text" name="otp">
+                        <label>Enter OTP</label>
+                    </div>
+
+                    <button type="button" class="verify-btn">
+                        Verify OTP
+                    </button>
+
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Create Account
+                </button>
+
+                <p class="login-link">
+                    Already have an account? <a href="#">Login</a>
+                </p>
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/signup.js' %}"></script>
+</body>
+
+</html>
