@@ -33,28 +33,24 @@
             <h2>Create Account</h2>
             <p class="subtitle">Join the learning ecosystem</p>
 
-            <form method="POST">
-                <!-- Django: {% csrf_token %} -->
+            <form method="post">
+                {% csrf_token %}
 
-                <!-- Full Name -->
                 <div class="input-group">
                     <input type="text" name="full_name" required>
                     <label>Full Name</label>
                 </div>
 
-                <!-- Email -->
                 <div class="input-group">
                     <input type="email" name="email" required>
                     <label>Email</label>
                 </div>
 
-                <!-- Password -->
                 <div class="input-group">
                     <input type="password" name="password" required>
                     <label>Password</label>
                 </div>
 
-                <!-- ROLE (this is the IMPORTANT FIX) -->
                 <input type="hidden" name="role" id="roleInput" value="student">
 
                 <div class="role-box">
@@ -66,7 +62,6 @@
                     </div>
                 </div>
 
-                <!-- Teacher Section -->
                 <div class="teacher-section" id="teacherSection" style="display:none;">
 
                     <div class="input-group">
@@ -74,7 +69,6 @@
                         <label>Institute Email</label>
                     </div>
 
-                    <!-- OTP is handled via backend / AJAX later -->
                     <button type="button" class="otp-btn">
                         Send OTP
                     </button>
