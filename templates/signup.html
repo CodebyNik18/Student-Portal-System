@@ -35,19 +35,21 @@
 
             <form method="post">
                 {% csrf_token %}
+                <input type="hidden" name="action" id="actionInput" value="signup">
+
 
                 <div class="input-group">
-                    <input type="text" name="name" placeholder="Full Name">
+                    <input type="text" name="name" placeholder="Full Name" value="{{name}}">
                     <label>Full Name</label>
                 </div>
 
                 <div class="input-group">
-                    <input type="email" name="email" placeholder="Email">
+                    <input type="email" name="email" placeholder="Email" value="{{email}}">
                     <label>Email</label>
                 </div>
 
                 <div class="input-group">
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password" value="{{password}}">
                     <label>Password</label>
                 </div>
 
@@ -65,13 +67,14 @@
                 <div class="teacher-section" id="teacherSection" style="display:none;">
 
                     <div class="input-group">
-                        <input type="email" name="institute_email">
+                        <input type="email" name="institute_email" value="{{institute_email}}">
                         <label>Institute Email</label>
                     </div>
 
-                    <button type="button" class="otp-btn">
+                    <button type="button" class="otp-btn" onclick="setActionSendOTP()">
                         Send OTP
                     </button>
+
 
                     <div class="input-group">
                         <input type="text" name="otp">
@@ -98,6 +101,7 @@
                 <button type="submit" class="submit-btn">
                     Create Account
                 </button>
+
 
                 <p class="login-link">
                     Already have an account? <a href="#">Login</a>
