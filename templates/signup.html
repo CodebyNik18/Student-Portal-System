@@ -37,17 +37,17 @@
                 {% csrf_token %}
 
                 <div class="input-group">
-                    <input type="text" name="full_name" required>
+                    <input type="text" name="name" placeholder="Full Name">
                     <label>Full Name</label>
                 </div>
 
                 <div class="input-group">
-                    <input type="email" name="email" required>
+                    <input type="email" name="email" placeholder="Email">
                     <label>Email</label>
                 </div>
 
                 <div class="input-group">
-                    <input type="password" name="password" required>
+                    <input type="password" name="password" placeholder="Password">
                     <label>Password</label>
                 </div>
 
@@ -83,6 +83,17 @@
                     </button>
 
                 </div>
+
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
 
                 <button type="submit" class="submit-btn">
                     Create Account
