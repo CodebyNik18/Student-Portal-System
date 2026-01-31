@@ -11,6 +11,7 @@ def signup(request):
         role = request.POST['role']
         
         if role.strip().lower() == 'student':
+            
             name = request.POST['name']
             email = request.POST['email']
             password = request.POST['password']
@@ -26,14 +27,16 @@ def signup(request):
             user = User.objects.create_user(username=email, email=email, password=password, first_name=name)
             Profile.objects.create(role=role, user=user)
             
-            return render(request=request, template_name='login.html')
+            messages.success(request=request, message='Account created Successfully...You can now login')
+            return redirect('login')
         
         else:
             print("Role: Teacher")
     
     return render(request=request, template_name='signup.html')
 
-
+def login(request):
+    return render(request=request, template_name='login.html')
 
 def learn_more(request):
     return render(request=request, template_name='learn_more.html')
