@@ -19,9 +19,6 @@ class Profile(models.Model):
     role = models.CharField(default='student', max_length=15, choices=ROLE_CHOICES)
     institute_email = models.EmailField(blank=True, null=True)
 
-    otp = models.IntegerField(blank=True, null=True)
-    otp_created_at = models.DateTimeField(blank=True, null=True)
-
     is_teacher_verified = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)

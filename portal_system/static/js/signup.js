@@ -24,4 +24,9 @@ roleOptions.forEach(option => {
 function setActionSendOTP() {
         document.getElementById("actionInput").value = "send_otp";
         document.querySelector("form").submit();
-    }
+}
+
+function setActionVerifyOTP() {
+    document.getElementById("actionInput").value = "verify_otp";
+    document.querySelector("form").submit();
+}

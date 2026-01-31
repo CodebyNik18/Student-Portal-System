@@ -10,7 +10,13 @@ from django.utils import timezone
 # Create your views here.
 def signup(request):
     
+    # if request.method == 'GET' and not request.session.get('otp_verified'):
+    #     request.session.pop('name', None)
+    #     request.session.pop('email', None)
+    #     request.session.pop('institute_email', None)
+        
     if request.method == 'POST':
+        print("POST data: ", request.POST)
         role = request.POST['role']
         
         if role.strip().lower() == 'student':
@@ -30,6 +36,13 @@ def signup(request):
             user = User.objects.create_user(username=email, email=email, password=password, first_name=name)
             Profile.objects.create(role=role, user=user)
             
+            request.session.pop('name', None)
+            request.session.pop('email', None)
+            request.session.pop('password', None)
+            request.session.pop('institute_email', None)
+            request.session.pop('teacher_otp', None)
+            request.session.pop('time', None)
+                        
             messages.success(request=request, message='Account created Successfully...You can now login')
             return redirect('login')
         
@@ -47,6 +60,7 @@ def signup(request):
             
             if User.objects.filter(username=email).exists():
                 messages.error(request=request, message='Email already exists...')
+                return redirect('signup')
                 
             if institute_email.lower().strip() == 'ashumanager77@gmail.com':
                 if action == 'send_otp':
@@ -58,6 +72,7 @@ def signup(request):
                     request.session['institute_email'] = institute_email
                     request.session['name'] = name
                     request.session['email'] = email
+                    request.session['password'] = password
                     
                     send_mail(
                         subject='OTP Request',
@@ -69,6 +84,61 @@ def signup(request):
                     messages.success(request=request, message='OTP sent to mail successfully..')
                     return redirect('signup')
                 
+                elif action == 'verify_otp':
+                    print(action)
+                    otp_time = request.session.get('time')
+                    input_otp = otp
+                    generated_otp = request.session.get('teacher_otp')
+                    
+                    if not generated_otp or not otp_time:
+                        messages.error(request=request, message='Request for OTP First...')
+                        return redirect('signup')
+                    
+                    total_time = timezone.now().timestamp()-otp_time
+                    
+                    if not input_otp:
+                        messages.error(request=request, message='Enter OTP for verification...')
+                        return redirect('signup')
+                    
+                    input_otp = str(input_otp).strip()
+                    
+                    if total_time > 300:
+                        messages.error(request=request, message='Time Expired...')
+                        return redirect('signup')
+                        
+                    if input_otp != str(generated_otp):
+                        messages.error(request=request, message='Invalid OTP...')
+                        return redirect('signup')
+                        
+                    request.session['otp_verified'] = True
+                    messages.success(request=request, message='OTP Verified...')
+                    return redirect('signup')
+                 
+                else:
+                    if request.session['otp_verified']:
+                        user = User.objects.create_user(
+                            username=email,
+                            email=email,
+                            password=password,
+                            first_name=name
+                        )
+                        
+                        Profile.objects.create(
+                            user=user,
+                            role=role,
+                            institute_email=institute_email,
+                            is_teacher_verified=True
+                        )
+                        
+                        request.session.pop('name', None)
+                        request.session.pop('email', None)
+                        request.session.pop('password', None)
+                        request.session.pop('institute_email', None)
+                        request.session.pop('teacher_otp', None)
+                        request.session.pop('time', None)
+                        
+                        messages.success(request=request, message='Account Created successfully, You can login now...')
+                        return redirect('login')
             else:
                 messages.error(request=request, message='Enter valid Institue Email..')
                 return redirect('signup')
