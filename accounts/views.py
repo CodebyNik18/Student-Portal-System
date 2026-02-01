@@ -6,8 +6,9 @@ from django.contrib import messages
 from faker import Faker
 from django.core.mail import send_mail
 from django.utils import timezone   
+from django.contrib.auth import authenticate, login
 
-# Create your views here.
+
 def signup(request):
     
     # if request.method == 'GET' and not request.session.get('otp_verified'):
@@ -151,6 +152,31 @@ def signup(request):
     return render(request=request, template_name='signup.html', context=context)
 
 def login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request=request, username=email, password=password)
+        
+        if user:
+            
+            profile = user.profile
+            role = profile.role
+            teacher_verified = profile.is_teacher_verified
+            
+            if role.lower().strip() == 'student':
+                return HttpResponse('Student Dashboard')
+            
+            elif role.lower().strip() == 'teacher' and teacher_verified:
+                return HttpResponse('Teacher Dashboard')
+            
+            else:
+                messages.error(request=request, message='Teacher is not verified...')
+                return redirect('login')
+            
+        else:
+            messages.error(request=request, message='Invalid Details..')
+            return redirect('login')
+        
     return render(request=request, template_name='login.html')
 
 def learn_more(request):
