@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses | Student Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/courses.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">🎓 Student Portal</div>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'courses' %}" class="active">Courses</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}" class="btn">Sign Up</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>B.Tech Courses</h1>
+    <p>Explore undergraduate engineering programs</p>
+</section>
+
+<section class="courses">
+
+    <div class="summary">
+        <h2>Total Courses Available</h2>
+        <span class="count">6</span>
+    </div>
+
+    <div class="course-grid">
+
+        <div class="course-card">
+            <h3>B.Tech Computer Science</h3>
+            <p>Core computing, programming, and software development.</p>
+        </div>
+
+        <div class="course-card">
+            <h3>B.Tech Information Technology</h3>
+            <p>Networking, databases, and IT infrastructure.</p>
+        </div>
+
+        <div class="course-card">
+            <h3>B.Tech Mechanical Engineering</h3>
+            <p>Design, manufacturing, and thermal engineering.</p>
+        </div>
+
+        <div class="course-card">
+            <h3>B.Tech Civil Engineering</h3>
+            <p>Construction, structures, and infrastructure planning.</p>
+        </div>
+
+        <div class="course-card">
+            <h3>B.Tech Electrical Engineering</h3>
+            <p>Power systems, machines, and control engineering.</p>
+        </div>
+
+        <div class="course-card">
+            <h3>B.Tech Electronics & Communication</h3>
+            <p>Electronics, communication systems, and signal processing.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Student Portal System</p>
+</footer>
+
+</body>
+</html>

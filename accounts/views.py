@@ -181,3 +181,6 @@ def login(request):
 
 def learn_more(request):
     return render(request=request, template_name='learn_more.html')
+
+def courses(request):
+    return render(request=request, template_name='courses.html')
