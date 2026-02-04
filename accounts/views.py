@@ -167,7 +167,7 @@ def login(request):
                 return HttpResponse('Student Dashboard')
             
             elif role.lower().strip() == 'teacher' and teacher_verified:
-                return HttpResponse('Teacher Dashboard')
+                return redirect('teachers')
             
             else:
                 messages.error(request=request, message='Teacher is not verified...')
