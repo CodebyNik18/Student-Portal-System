@@ -15,3 +15,7 @@ class Course(models.Model):
     course = models.CharField(blank=False, choices=COURSE_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    
+    def __str__(self):
+        return self.user.first_name

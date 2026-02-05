@@ -45,7 +45,7 @@ def signup(request):
             request.session.pop('time', None)
                         
             messages.success(request=request, message='Account created Successfully...You can now login')
-            return redirect('login')
+            return redirect('login_')
         
         else:
             name = request.POST['name']
@@ -139,7 +139,7 @@ def signup(request):
                         request.session.pop('time', None)
                         
                         messages.success(request=request, message='Account Created successfully, You can login now...')
-                        return redirect('login')
+                        return redirect('login_')
             else:
                 messages.error(request=request, message='Enter valid Institue Email..')
                 return redirect('signup')
@@ -151,7 +151,7 @@ def signup(request):
     }
     return render(request=request, template_name='signup.html', context=context)
 
-def login(request):
+def login_(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -167,15 +167,16 @@ def login(request):
                 return HttpResponse('Student Dashboard')
             
             elif role.lower().strip() == 'teacher' and teacher_verified:
+                login(request=request, user=user)
                 return redirect('teachers')
             
             else:
                 messages.error(request=request, message='Teacher is not verified...')
-                return redirect('login')
+                return redirect('login_')
             
         else:
             messages.error(request=request, message='Invalid Details..')
-            return redirect('login')
+            return redirect('login_')
         
     return render(request=request, template_name='login.html')
 

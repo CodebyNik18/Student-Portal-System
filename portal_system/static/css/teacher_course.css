@@ -1,3 +1,4 @@
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -5,90 +6,173 @@
     font-family: "Poppins", sans-serif;
 }
 
+/* ================= PAGE BACKGROUND ================= */
 body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    background:
+        radial-gradient(circle at top left, rgba(79,70,229,0.35), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(6,182,212,0.35), transparent 40%),
+        linear-gradient(135deg, #0f172a, #020617);
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #0f172a;
 }
 
-/* MAIN CONTAINER */
+/* ================= MAIN CARD ================= */
 .dashboard-container {
-    background: rgba(255,255,255,0.95);
-    width: 420px;
-    max-width: 95%;
-    padding: 40px;
-    border-radius: 22px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    width: 440px;
+    max-width: 94%;
+    padding: 42px 38px;
+    border-radius: 26px;
+
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 40px 80px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+
     text-align: center;
-    animation: fadeIn 0.8s ease forwards;
+    animation: containerEnter 0.9s ease forwards;
 }
 
+/* ================= TITLES ================= */
 .dashboard-container h1 {
-    font-size: 2rem;
-    margin-bottom: 8px;
+    font-size: 2.05rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
 }
 
 .subtitle {
+    font-size: 0.95rem;
     color: #64748b;
-    margin-bottom: 30px;
+    margin-bottom: 34px;
 }
 
-/* COURSE GRID */
+/* ================= COURSE LIST ================= */
 .course-grid {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 }
 
-/* COURSE CARD */
+/* ================= COURSE CARD (FORM) ================= */
 .course-card {
-    background: #f8fafc;
-    padding: 22px;
-    border-radius: 16px;
+    all: unset; /* removes default form styles safely */
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
+    justify-content: space-between;
+
+    padding: 22px 24px;
+    border-radius: 18px;
+
+    background:
+        linear-gradient(180deg, #ffffff, #f8fafc);
+
+    box-shadow:
+        0 14px 30px rgba(0,0,0,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+
+    cursor: pointer;
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        background 0.35s ease;
 }
 
-.course-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 25px 45px rgba(0,0,0,0.15);
+/* Hover & Focus */
+.course-card:hover,
+.course-card:focus-within {
+    transform: translateY(-6px) scale(1.015);
+    box-shadow:
+        0 30px 60px rgba(0,0,0,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+
+    background:
+        linear-gradient(180deg, #ffffff, #eef2ff);
 }
 
+/* ================= COURSE TITLE ================= */
 .course-card h3 {
     font-size: 1rem;
+    font-weight: 600;
+    color: #0f172a;
     text-align: left;
+    max-width: 65%;
+    line-height: 1.35;
 }
 
-/* BUTTON */
+/* ================= BUTTON ================= */
 .course-card button {
-    padding: 8px 18px;
-    border-radius: 20px;
+    padding: 9px 20px;
+    border-radius: 999px;
     border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
+
+    background:
+        linear-gradient(135deg, #4f46e5, #06b6d4);
+
     color: white;
-    background: linear-gradient(135deg, #4f46e5, #06b6d4);
-    transition: transform 0.2s;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 18px rgba(79,70,229,0.35);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
 }
 
+/* Button Hover */
 .course-card button:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    filter: brightness(1.05);
+    box-shadow:
+        0 14px 30px rgba(79,70,229,0.5);
 }
 
-/* ANIMATION */
-@keyframes fadeIn {
+/* Button Active */
+.course-card button:active {
+    transform: scale(0.97);
+}
+
+/* ================= ENTRY ANIMATION ================= */
+@keyframes containerEnter {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(25px) scale(0.97);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 480px) {
+    .dashboard-container {
+        padding: 34px 26px;
+    }
+
+    .course-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .course-card h3 {
+        max-width: 100%;
+    }
+
+    .course-card button {
+        align-self: flex-end;
     }
 }

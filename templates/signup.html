@@ -33,7 +33,7 @@
             <h2>Create Account</h2>
             <p class="subtitle">Join the learning ecosystem</p>
 
-            <form method="post">
+            <form action="{% url 'signup' %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="action" id="actionInput" value="signup">
 
@@ -104,7 +104,7 @@
 
 
                 <p class="login-link">
-                    Already have an account? <a href="{% url 'login' %}">Login</a>
+                    Already have an account? <a href="{% url 'login_' %}">Login</a>
                 </p>
             </form>
 
