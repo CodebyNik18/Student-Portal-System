@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Assignment | Teacher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/add_assignment.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <div class="assignment-card">
+
+        <div class="header">
+            <h1>📄 Add New Assignment</h1>
+            <p>Create and upload a new assignment</p>
+        </div>
+
+        <form action="{% url 'add_assignments' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label>Assignment Title</label>
+                <input name="title" type="text" placeholder="e.g. Introduction to Python" required>
+            </div>
+
+            <div class="input-group">
+                <label>Assignment PDF</label>
+                <input
+                    name="pdf"
+                    type="file"
+                    accept="application/pdf"
+                    required
+                    class="file-input"
+                >
+            </div>
+
+            <div class="input-group">
+                <label>Due Date & Time</label>
+                <input name="due_date" type="datetime-local" required>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="secondary-btn">Cancel</button>
+                <button type="submit" class="primary-btn">Create Assignment</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

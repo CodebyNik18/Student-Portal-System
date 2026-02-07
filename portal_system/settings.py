@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'courses',
+    'assignments',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,7 @@ STATICFILES_DIRS = [
     'portal_system/static',
 ]
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
@@ -130,3 +132,6 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'ashumanager77@gmail.com'
 EMAIL_HOST_PASSWORD = 'hetn rdri ayzt nrsq'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR/'media'
