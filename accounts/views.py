@@ -86,7 +86,6 @@ def signup(request):
                     return redirect('signup')
                 
                 elif action == 'verify_otp':
-                    print(action)
                     otp_time = request.session.get('time')
                     input_otp = otp
                     generated_otp = request.session.get('teacher_otp')
