@@ -45,8 +45,12 @@
                             </div>
 
                             <div class="assignment-actions">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
+                                <a href="{% url 'edit_assignments' assignment.pk %}">
+                                    <button class="edit-btn">Edit</button>
+                                </a>
+                                <a href="{% url 'delete_assignments' assignment.pk %}">
+                                    <button class="delete-btn">Delete</button>
+                                </a>
                             </div>
                         </div>
 
