@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard | Assignments</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/student_dashboard.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+
+    <header class="dashboard-header">
+        <div>
+            <h1>👨‍🎓 Welcome, {{user}}</h1>
+            <p>Course: <span>{{course}}</span></p>
+        </div>
+    </header>
+
+    <section class="assignments-section">
+        <h2>Your Assignments</h2>
+
+        <div class="assignment-grid">
+
+            <div class="assignment-card">
+
+                <div class="assignment-top">
+                    <h3>Assignment 1: Introduction to Python</h3>
+                    <span class="status pending">Pending</span>
+                </div>
+
+                <p class="description">
+                    Basic syntax, variables, and data types.
+                </p>
+
+                <div class="assignment-meta">
+                    <span>📅 Due: 20 Feb 2026, 11:59 PM</span>
+                </div>
+
+                <form class="submit-form" method="post" enctype="multipart/form-data">
+                    <!-- later: {% csrf_token %} -->
+                    <input type="file" accept="application/pdf" required>
+                    <button type="submit">Submit Assignment</button>
+                </form>
+
+            </div>
+
+            <div class="assignment-card">
+
+                <div class="assignment-top">
+                    <h3>Assignment 2: Control Flow</h3>
+                    <span class="status submitted">Submitted</span>
+                </div>
+
+                <p class="description">
+                    Conditions, loops, and logical flow.
+                </p>
+
+                <div class="assignment-meta">
+                    <span>📅 Due: 15 Feb 2026, 11:59 PM</span>
+                </div>
+
+                <div class="submitted-info">
+                    ✅ PDF submitted successfully
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard | Student Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/student_course.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <h1>👩‍🏫 Student Dashboard</h1>
+        <p class="subtitle">Select Your Course</p>
+
+        <div class="course-grid">
+
+            <form class="course-card" method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="course" value="AIML">
+
+                <h3>B.Tech AIML</h3>
+                <button type="submit">Select Course</button>
+            </form>
+
+            <form class="course-card" method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="course" value="IT">
+
+                <h3>B.Tech Information Technology</h3>
+                <button type="submit">Select Course</button>
+            </form>
+
+            <form class="course-card" method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="course" value="CORE">
+
+                <h3>B.Tech Computer Science</h3>
+                <button type="submit">Select Course</button>
+            </form>
+
+            <form class="course-card" method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="course" value="CE">
+
+                <h3>B.Tech Civil Engineering</h3>
+                <button type="submit">Select Course</button>
+            </form>
+
+            <form class="course-card" method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="course" value="EE">
+
+                <h3>B.Tech Electrical Engineering</h3>
+                <button type="submit">Select Course</button>
+            </form>
+
+            <form class="course-card" method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="course" value="ME">
+
+                <h3>B.Tech Mechanical Engineering</h3>
+                <button type="submit">Select Course</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

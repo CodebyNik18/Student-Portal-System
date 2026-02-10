@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'courses',
     'assignments',
+    'enrollment'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'portal_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'templates/teachers'],
+        'DIRS': ['templates', 'templates/teachers', 'templates/students'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

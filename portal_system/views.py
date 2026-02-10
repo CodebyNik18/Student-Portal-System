@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from courses.models import Course
 from django.contrib.auth.models import User
 from django.contrib import messages
+from enrollment.models import Enrollment
 
 def home(request):
     return render(request=request, template_name='home.html')
@@ -30,3 +31,19 @@ def teachers(request):
             return redirect('login_')
             
     return render(request=request, template_name='teacher_course.html')
+
+
+def students(request):
+    user = request.user
+    if Enrollment.objects.filter(user=user).exists():
+        return redirect('dashboard')
+    
+    if request.method == 'POST':
+        course = request.POST['course']
+        
+        Enrollment.objects.create(
+            user=user,
+            course=course
+        )
+        return redirect('dashboard')
+    return render(request=request, template_name='student_course.html')
