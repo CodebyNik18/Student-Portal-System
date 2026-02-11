@@ -24,3 +24,16 @@ class Assignment(models.Model):
     
     def __str__(self):
         return self.teacher_name.get_full_name()
+    
+    def full_name(self):
+        return self.teacher_name.get_full_name()
+    
+    
+class SubmitAssignment(models.Model):
+     
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    pdf = models.FileField(upload_to='submitted_pdfs/', blank=False)
+    is_submitted = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

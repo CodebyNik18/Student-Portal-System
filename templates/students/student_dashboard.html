@@ -25,30 +25,33 @@
 
         <div class="assignment-grid">
 
+            {% for assignment in assignments %}
             <div class="assignment-card">
 
                 <div class="assignment-top">
-                    <h3>Assignment 1: Introduction to Python</h3>
+                    <h3>{{assignment.title}}</h3>
                     <span class="status pending">Pending</span>
                 </div>
 
                 <p class="description">
-                    Basic syntax, variables, and data types.
+                    By: {{assignment.full_name}}
                 </p>
 
                 <div class="assignment-meta">
-                    <span>📅 Due: 20 Feb 2026, 11:59 PM</span>
+                    <span>📅 Due: {{assignment.due_date}}</span>
                 </div>
 
                 <form class="submit-form" method="post" enctype="multipart/form-data">
-                    <!-- later: {% csrf_token %} -->
+                    {% csrf_token %}
                     <input type="file" accept="application/pdf" required>
                     <button type="submit">Submit Assignment</button>
                 </form>
 
             </div>
+            {% endfor %}
 
-            <div class="assignment-card">
+            <!-- Completed Assignment -->
+            <!-- <div class="assignment-card">
 
                 <div class="assignment-top">
                     <h3>Assignment 2: Control Flow</h3>
@@ -67,7 +70,7 @@
                     ✅ PDF submitted successfully
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </section>
