@@ -23,7 +23,7 @@ class Assignment(models.Model):
     
     
     def __str__(self):
-        return self.teacher_name.get_full_name()
+        return self.title
     
     def full_name(self):
         return self.teacher_name.get_full_name()

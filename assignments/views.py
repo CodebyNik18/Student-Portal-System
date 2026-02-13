@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Assignment
+from .models import Assignment, SubmitAssignment
 
 def add_assignments(request):
     
@@ -20,7 +20,7 @@ def add_assignments(request):
             due_date=due_date
         )
         
-        return redirect('dashboard')
+        return redirect('teacher_dashboard')
     
     return render(request=request, template_name='add_assignment.html')
 
@@ -39,7 +39,7 @@ def edit_assignments(request, pk):
         
         data.save()
         
-        return redirect('dashboard')
+        return redirect('teacher_dashboard')
     
     context = {
         'data': data
@@ -53,4 +53,23 @@ def delete_assignments(request, pk):
     data = Assignment.objects.get(pk=pk)
     
     data.delete()
-    return redirect('dashboard')
+    return redirect('teacher_dashboard')
+
+
+def submit_assignment(request, pk):
+    if request.method == 'POST':
+        user = request.user
+        assignment = Assignment.objects.get(id=pk)
+        pdf = request.FILES['pdf']
+        SubmitAssignment.objects.create(
+            user=user,
+            assignment=assignment,
+            pdf=pdf,
+            is_submitted=True
+        )
+        return redirect('dashboard')
+    return render(request=request, template_name='student_dashboard.html') 
+
+# I: Submit assignment working fine 
+# II: First edit frontend for completed and pending
+# III: then work on displaying assignments

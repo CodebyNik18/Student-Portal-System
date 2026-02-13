@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Student Dashboard | Assignments</title>
@@ -8,74 +9,112 @@
 
     <link rel="stylesheet" href="{% static 'css/student_dashboard.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        
+    </style>
 </head>
+
 <body>
 
-<div class="dashboard-wrapper">
+    <div class="dashboard-wrapper">
 
-    <header class="dashboard-header">
-        <div>
-            <h1>👨‍🎓 Welcome, {{user}}</h1>
-            <p>Course: <span>{{course}}</span></p>
-        </div>
-    </header>
-
-    <section class="assignments-section">
-        <h2>Your Assignments</h2>
-
-        <div class="assignment-grid">
-
+        <header class="dashboard-header">
+            <div>
+                <h1>👨‍🎓 Welcome, {{user}}</h1>
+                <p>Course: <span>{{course}}</span></p>
+            </div>
+        </header>
+        
+        <!-- pending and submitted assignments -->
+        <section class="assignments-section">
+            <h2>📌 Pending Assignments</h2>
             {% for assignment in assignments %}
-            <div class="assignment-card">
+            {% if assignment.id not in submitted_assignments_id %}
+            
+            <div class="assignment-grid">
 
-                <div class="assignment-top">
-                    <h3>{{assignment.title}}</h3>
-                    <span class="status pending">Pending</span>
-                </div>
+                    <div class="assignment-card">
 
-                <p class="description">
-                    By: {{assignment.full_name}}
-                </p>
+                        <div class="assignment-top">
+                            <h3>{{assignment.title}}</h3>
+                            <span class="status pending">Pending</span>
+                        </div>
 
-                <div class="assignment-meta">
-                    <span>📅 Due: {{assignment.due_date}}</span>
-                </div>
+                        <p class="description">
+                            By: {{assignment.teacher_name}}
+                        </p>
 
-                <form class="submit-form" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="file" accept="application/pdf" required>
-                    <button type="submit">Submit Assignment</button>
-                </form>
+                        <div class="assignment-meta">
+                            📅 Due: {{assignment.due_date}}
+                        </div>
+
+                        <div class="assignment-actions">
+                            <a href="{{ assignment.assignment.url }}" target="_blank" class="view-btn">
+                                View Assignment PDF
+                            </a>
+                        </div>
+
+                        <form action="{% url 'submit_assignment' assignment.id %}" class="submit-form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input name="pdf" type="file" accept="application/pdf" required>
+                            <button type="submit">Submit Assignment</button>
+                        </form>
+
+                    </div>
 
             </div>
+            {% else %}
+            <p class="description">
+                No Pending Assignments...
+            </p>
+            {% endif %}
             {% endfor %}
+        </section>
 
-            <!-- Completed Assignment -->
-            <!-- <div class="assignment-card">
+        <section class="submitted-section">
+            <h2>✅ Submitted Assignments</h2>
 
-                <div class="assignment-top">
-                    <h3>Assignment 2: Control Flow</h3>
-                    <span class="status submitted">Submitted</span>
+            {% for assignment in assignments %}
+            {% if assignment.id in submitted_assignments_id %}
+            <div class="assignment-grid">
+
+                <div class="assignment-card submitted-card">
+
+                    <div class="assignment-top">
+                        <h3>{{assignment.title}}</h3>
+                        <span class="status submitted">Submitted</span>
+                    </div>
+
+                    <p class="description">
+                        By: {{assignment.teacher_name}}
+                    </p>
+
+                    <div class="assignment-meta">
+                        📅 Submitted on: 14 Feb 2026, 09:45 PM
+                    </div>
+
+                    <div class="assignment-actions">
+                        <a href="{{assignment.assignment.url}}" target="_blank" class="view-btn">
+                            View Assignment PDF
+                        </a>
+                    </div>
+
+                    <div class="submitted-info">
+                        ✔ PDF uploaded successfully
+                    </div>
+
                 </div>
-
+                {% else %}
                 <p class="description">
-                    Conditions, loops, and logical flow.
+                    No Submitted Assignments..
                 </p>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </section>
 
-                <div class="assignment-meta">
-                    <span>📅 Due: 15 Feb 2026, 11:59 PM</span>
-                </div>
-
-                <div class="submitted-info">
-                    ✅ PDF submitted successfully
-                </div>
-
-            </div> -->
-
-        </div>
-    </section>
-
-</div>
+    </div>
 
 </body>
+
 </html>
