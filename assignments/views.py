@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Assignment, SubmitAssignment
+from django.utils import timezone
+from django.contrib import messages
 
 def add_assignments(request):
     
@@ -61,6 +63,7 @@ def submit_assignment(request, pk):
         user = request.user
         assignment = Assignment.objects.get(id=pk)
         pdf = request.FILES['pdf']
+        due_date = assignment.due_date
         SubmitAssignment.objects.create(
             user=user,
             assignment=assignment,
